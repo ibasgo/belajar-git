@@ -1,0 +1,171 @@
+---
+title: "Modul Analisis Data Epidemiologi dengan R"
+author: "Muhammad Ilham Basgoro"
+date: "2025-10-03"
+output: html_document
+---
+
+# Bab 1. Pengantar
+
+## 1.1 Apa itu R?
+
+R adalah bahasa pemrograman yang banyak digunakan dalam bidang statistik, epidemiologi, dan ilmu kesehatan masyarakat.\
+Beberapa kelebihan R untuk epidemiologi:\
+- Gratis dan *open source*\
+- Memiliki banyak paket (*packages*) untuk analisis epidemiologi (misalnya **epiR**, **epitools**)\
+- Kuat dalam visualisasi (misalnya dengan **ggplot2**)\
+- Terintegrasi dengan RStudio untuk memudahkan penulisan kode
+
+## 1.2 Apa itu RStudio?
+
+RStudio adalah *Integrated Development Environment* (IDE) untuk R.\
+Kelebihan RStudio:\
+- Tampilan lebih terorganisir\
+- Mendukung RMarkdown untuk membuat laporan otomatis\
+- Memudahkan manajemen proyek penelitian
+
+Tampilan utama RStudio terdiri dari:\
+1. **Source**: tempat menulis kode atau RMarkdown\
+2. **Console**: tempat eksekusi kode\
+3. **Environment/History**: menampilkan data yang digunakan\
+4. **Plots/Help/Packages/Viewer**: visualisasi, bantuan, dan manajemen paket
+
+## 1.3 Apa itu RMarkdown?
+
+RMarkdown adalah format dokumen yang memungkinkan kita menulis **narasi (teks)** dan **kode R** dalam satu file.\
+Keuntungan menggunakan RMarkdown:\
+- Analisis ***reproducible*** (hasil dapat diulang dengan mudah)\
+- Output fleksibel (HTML, PDF, Word)\
+- Dapat membuat laporan analisis epidemiologi secara otomatis
+
+## 1.4 Alur Belajar dalam Modul
+
+Dalam modul ini kita akan mempelajari:\
+1. Manajemen data epidemiologi (*import*, *cleaning*, *recoding*)\
+2. Analisis deskriptif (frekuensi, rata-rata, proporsi)\
+3. Analisis epidemiologi dasar (prevalens, insidens, OR, RR)\
+4. Analisis lanjutan (regresi logistik, regresi Poisson, *survival analysis*)\
+5. Visualisasi data (grafik tren, peta sebaran kasus)
+
+## 1.5 Tujuan Pembelajaran
+
+Setelah mempelajari Bab 1, peserta diharapkan mampu:\
+1. Menjelaskan apa itu R dan mengapa penting dalam epidemiologi dan kesehatan masyarakat.\
+2. Mengenali fungsi utama RStudio serta bagian-bagian panel utamanya.\
+3. Memahami konsep dasar RMarkdown sebagai alat untuk membuat laporan analisis yang *reproducible*.\
+4. Mengetahui alur pembelajaran yang akan dipelajari dalam modul ini.
+
+------------------------------------------------------------------------
+
+👩‍💻 **Latihan 1**
+
+Sebuah vektor `a` berisi angka `10, 20, 30` akan disimpan ke dalam variabel.\
+Contoh potongan kode (*code chunk*):
+
+``` contoh
+a <- c(10, 20, 30)
+mean(a)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan kode/syntax tersebut di bawah ini
+
+```
+
+------------------------------------------------------------------------
+
+## 1.6 *Object Classes*
+
+Dalam menggunakan R, kita harus memahami tipe dari setiap variabel yang ada dalam data kita, tipe data tersebut dapat dilihat pada tabel berikut.
+
+| Class | Deskripsi | Contoh |
+|----|----|----|
+| Character | Teks/kata/kalimat “dalam tanda kutip”, operasi matematika tidak dapat dilakukan pada objek-objek ini. | "Laki-laki", "Perempuan", "penduduk" |
+| Integer | Angka-angka yang hanya berupa bilangan bulat (tanpa desimal) | -10, -25, 30, 100 |
+| Numeric | Angka dan dapat mencakup desimal. Jika berada di dalam tanda kutip, mereka akan dianggap sebagai kelas *Character*. | 1.2, 20.3, 40.5, 200 |
+| Factor | Vektor yang memiliki urutan atau hierarki nilai yang ditentukan | factor(c("rendah","sedang","tinggi"), ordered=TRUE) |
+| Date | Setelah R diberitahu bahwa data tertentu adalah tanggal, data tersebut dapat diolah dan ditampilkan dengan cara khusus | as.Date("2020-01-01") |
+| Logical | Nilai harus salah satu dari dua nilai khusus TRUE atau FALSE (perhatikan bahwa ini bukan “TRUE” dan “FALSE” dalam tanda kutip) | TRUE atau FALSE |
+| dataframe | Data frame adalah cara R menyimpan dataset tipikal. Data frame terdiri dari vektor (kolom) data yang diikat bersama, yang semuanya memiliki jumlah pengamatan (baris) yang sama | data.frame(x=1:3, y=c("A","B","C")) |
+
+referensi: <https://www.epirhandbook.com/en/new_pages/basics.html>
+
+------------------------------------------------------------------------
+
+**Contoh *Object Classes***
+
+Sebuah variabel `a` berisi angka `10, 20, 30` akan disimpan ke dalam variabel.\
+Contoh potongan kode (*code chunk*):
+
+``` contoh
+a <- c(10, 20, 30)
+class(a)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan kode/syntax tersebut di bawah ini dan jalankan!
+a <- c(10, 20, 30)
+class(a)
+```
+
+Sebuah variabel `b` berisi kata `"Ya", "Tidak", "OK"` akan disimpan ke dalam variabel.\
+Contoh potongan kode (*code chunk*):
+
+``` contoh
+a <- c("Ya", "Tidak", "ok")
+class(a)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan kode/syntax tersebut di bawah ini dan jalankan!
+
+```
+
+Sebuah variabel `pendidikan` berisi angka `"rendah", "sedang", "tinggi"` akan disimpan ke dalam variabel.\
+Contoh potongan kode (*code chunk*):
+
+``` contoh
+pendidikan <- factor(c("rendah", "sedang", "tinggi"), ordered= TRUE)
+class(pendidikan)
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan kode/syntax tersebut di bawah ini dan jalankan!
+
+```
+
+```{r}
+# Jika anda ingin mengetahui urutannya, bisa lihat di bawah ini!
+levels(pendidikan)
+```
+
+------------------------------------------------------------------------
+
+## 1.7 Operator relasional dan logis
+
+Operator relasional membandingkan nilai dan sering digunakan saat mendefinisikan variabel baru dan subset dari dataset. Berikut adalah operator relasional yang umum digunakan dalam R:
+
+| Istilah | Operator | Contoh | Contoh *output* |
+|----|:--:|:--:|----|
+| Sama dengan | `==` | "A" == "a" | Salah karena R sensitif terhadap huruf besar dan kecil |
+| Tidak sama dengan | `!=` | 2 != 0 | Benar |
+| Kurang dari | `<` | 5 \< 10 | Benar |
+| Besar dari | `>` | 5 \> 10 | Salah |
+| Kurang sama kuran dari | `<=` | 5 \<= 10 | Benar |
+| Besar sama kurang dari | `>=` | 5 \>= 10 | Salah |
+
+referensi: <https://www.epirhandbook.com/en/new_pages/basics.html>
+
+Sebelum lanjut ke Bab selanjutnya, silakan *install* *package* berikut untuk digunakan di pembelajaran selanjutnya.
+
+```{r message=FALSE, warning=FALSE}
+# readxr
+install.packages("readr")
+# readxl
+install.packages("readxl")
+# epicalc
+install.packages("epicalc", repos = "https://medipe.psu.ac.th/epicalc")
+```
+
+Dibuat Oleh:\
+`Muhammad Ilham Basgoro`

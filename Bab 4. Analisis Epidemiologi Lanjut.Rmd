@@ -1,0 +1,84 @@
+---
+title: "Modul Analisis Data Epidemiologi dengan R"
+author: "Muhammad Ilham Basgoro"
+date: "2025-10-04"
+output: html_document
+---
+
+# Bab 4. Analisis Epidemiologi Lanjut
+
+Investigasi wabah merupakan tugas yang sering diberikan kepada seorang epidemiolog. Bab ini menjelaskan cara menggambarkan data secara efektif, pada bab ini kita akan menggunakan *dataset* `Outbreak`. Data tersebut merupakan data bawaan dari *package* `epicalc`.\
+Sebelum memulai analisis anda harus memanggil kembali package epicalc terlebih dahulu, setelah itu anda harus membersihkan workspace dan memori, menggunakan fungsi zap(), agar aplikasi RStudio anda tidak berat.
+
+```{r message=FALSE, warning=FALSE}
+# Jalankan kode berikut!
+library(epicalc)
+zap()
+```
+
+Pada tanggal 25 Agustus 1990, petugas kesehatan setempat di Provinsi Supan Buri, Thailand, melaporkan terjadinya wabah penyakit *gastrointestinal* akut pada acara hari olahraga nasional untuk penyandang disabilitas. Dr. Lakkana Thaikruea dan rekan-rekannya pergi untuk menyelidiki. Set data ini disebut `Outbreak`. Variabel dikodekan sebagai 0 = tidak (*no*), 1 = ya (yes), dan 9 = *missing*/tidak diketahui. Untuk tiga jenis makanan yang dikonsumsi peserta adalah `beefcurry` (kari sapi), `saltegg` (telur asin), dan `water` (air). Menu juga mencakup `eclairs`, kue berlapis es berbentuk jari dari adonan *choux* yang diisi krim. Variabel ini mencatat jumlah potong yang dimakan oleh setiap peserta. Nilai yang hilang dikodekan sebagai berikut: 88 = “makan tetapi tidak ingat berapa banyak”, sementara kode 90 mewakili informasi yang hilang sepenuhnya. Beberapa peserta mengalami gejala gastrointestinal, seperti: `mual, muntah, nyeri perut, dan diare`. Usia masing-masing peserta dicatat dalam tahun dengan 99 mewakili nilai yang hilang atau *missing*.
+
+Pada bab ini kita juga akan menggunakan fungsi baru yaitu `use()`. Tujuannya adalah untuk menggunakan set data yang telah kita panggil dan meringkaskan fungsi yang terlalu panjang seperti
+
+```         
+summ(Outbreak) menjadi summ()
+des(Outbreak) menjadi des()
+Summ(Familydata$money, by=Familydata$sex) menjadi summ(money, by=sex)
+```
+
+artinya anda tidak perlu menambahkan nama data sebelum nama variabel pada seluruh analisis `Familydata$money` = `money` (memanggil variabel `money` dari dataset `Familydata`).
+
+## 4.1 Eksplorasi data
+
+Sebelum eksplorasi data `Outbrek`, anda harus memanggil data tersebut terlebih dahulu.
+
+```         
+hint:
+panggil data tersebut menggunakan fungsi data() dan tambah fungsi use()
+```
+
+```{r}
+# Tuliskan kode tersebut dan jalankan!
+data(Outbreak)
+use(Outbreak)
+```
+
+### 1. Lakukan eksplorasi data sederhana menggunakan `des()`
+
+```{r}
+# Tuliskan kode tersebut dan jalankan!
+
+```
+
+### 2. Lakukan eksplorasi data sederhana menggunakan `summ()`
+
+```{r}
+# Tuliskan kode tersebut dan jalankan!
+
+```
+
+Kita akan mendefinisikan terlebih dahulu `kasus` dalam investasi wabah ini, para peneliti sepakat bahwa suatu kasus harus didefinisikan sebagai seseorang yang mengalami salah satu dari empat gejala: `nausea`, `vomiting`, `abdpain`, atau `diarrhea`. Suatu kasus dapat dihitung sebagai berikut:
+
+```         
+case <- (nausea==1)|(vomiting==1)|(abdpain==1)|(diarrhea==1)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+case <- (nausea==1)|(vomiting==1)|(abdpain==1)|(diarrhea==1)
+```
+
+Untuk memasukkan variabel baru ini ke dalam .data, kita menggunakan fungsi `label.var`.
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+label.var(case, "diseased")
+```
+
+------------------------------------------------------------------------
+
+Selamat anda telah menyelesaikan pembelajaran pada Bab 4, anda dapat melanjutkan ke Bab selanjutnya!
+
+Referensi: <https://cran.r-project.org/doc/contrib/Epicalc_Book.pdf>\
+Dibuat Oleh:\
+`Muhammad Ilham Basgoro`

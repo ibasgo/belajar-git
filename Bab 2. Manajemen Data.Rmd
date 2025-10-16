@@ -1,0 +1,388 @@
+---
+title: "Modul Analisis Data Epidemiologi dengan R"
+author: "Muhammad Ilham Basgoro"
+date: "2025-10-03"
+output: html_document
+---
+
+# Bab 2. Manajemen Data
+
+Pada bab ini kita akan belajar bagaimana cara membaca, mengeksplorasi, dan mengelola data menggunakan R, khususnya dengan bantuan paket `epicalc` yang banyak digunakan di bidang epidemiologi.
+
+## 2.1 Mengimpor Data
+
+Dalam penelitian epidemiologi, data biasanya tersimpan dalam format **CSV** atau **Excel**.\
+Kita akan menggunakan paket `readr` (untuk CSV) dan `readxl` (untuk Excel).
+
+Dataset yang digunakan adalah data *dummy* kasus DBD di Kota Padang tahun 2020–2021, yang sudah tersedia dalam format CSV dan XLSX.
+
+``` contoh
+# library yang diperlukan
+library(readr)   # untuk membaca CSV
+library(readxl)  # untuk membaca Excel
+library(epicalc) # untuk manajemen data epidemiologi/kesehatan
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan ulang library tersebut dan jalankan!
+
+```
+
+### 1. Impor data excel
+
+Sebelum anda impor data yang akan digunakan, anda perlu mengatur tempat penyimpanan data tersebut. Salah satu caranya anda dapat pergi ke:\
+\> `Menu Session` \> `Set Working Directory` \> `Choose Directory` \> `Silakan pilih tempat anda menyimpan data`
+
+Berikut adalah tempat saya menyimpan data setelah saya lakukan hal yang di atas.
+
+``` contoh
+setwd("E:/Modul R")
+```
+
+Kemudian saya jalankan di *code chunk* berikut ini.
+
+```{r message=FALSE, warning=FALSE}
+# copy tempat penyimpanan anda yang telah ada lakukan di atas
+
+```
+
+Setelah anda mengatur tempat penyimpanan data, silakan lanjut ke tahap selanjutnya.
+
+``` contoh
+data1 <- read.csv("data_dummy.csv")
+data2 <- read_excel("data_dummy.xlsx")
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+### 2. Impor data spss
+
+Sebelum impor data dengan ekstension .dta dan .sav, anda perlu mengaktifkan *library* `haven`.\
+Jika anda belum mempunyai *package* tersebut, anda dapat meng-*install* nya dengan menjalankan *syntax* berikut.
+
+```{r message=FALSE, warning=FALSE}
+# Untuk menginstall library haven
+install.packages("haven")
+```
+
+```{r message=FALSE, warning=FALSE}
+# Jalankan library(haven)
+library(haven)
+```
+
+Setelah itu anda dapat menggunakannya seperti berikut.
+
+``` contoh
+data3 <- read_sav("data_dummy.sav")
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+### 3. Impor data stata
+
+Untuk data stata anda dapat menggunakannya seperti berikut.
+
+``` contoh
+data3 <- read_dta("data_dummy.dta")
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+## 2.2 Eksplorasi Data
+
+Ketika pertama kali meng-import dataset, sangat penting untuk melihat bagaimana struktur data tersebut. Ada beberapa fungsi yang umum dipakai:
+
+### 1. Fungsi Des()
+
+Untuk melihat deskripsi *dataframe*/*dataset*/variabel dari data yang kita punya.\
+- Berasal dari paket epicalc.\
+- Memberikan deskripsi ringkas dari setiap variabel dalam dataset.\
+- Menunjukkan jenis variabel (*numeric*, *factor*, dll), jumlah nilai missing, serta statistik ringkas.
+
+``` contoh
+des(data yang digunakan)
+des(data1)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+des(data1)
+```
+
+Apa yang dapat anda simpulkan?
+
+```         
+Tuliskan di bawah ini!
+1.
+2.
+```
+
+### 2. Fungsi head()
+
+Melihat beberapa baris awal dataset.\
+- Fungsi bawaan R.\
+- Menampilkan beberapa baris pertama dari dataset (*default* = 6 baris).\
+- Berguna untuk sekilas melihat isi data.
+
+``` contoh
+head(data yang digunakan)
+head(data1)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan?
+
+```         
+Tuliskan di bawah ini!
+1.
+2.
+```
+
+### 3. Fungsi tail()
+
+Melihat beberapa baris akhir dataset.\
+- Kebalikan dari head().\
+- Menampilkan beberapa baris terakhir dari dataset (default = 6 baris).\
+- Berguna untuk melihat akhir data, misalnya tahun terbaru.
+
+``` contoh
+tail(data yang digunakan)
+tail(data1)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan?
+
+``` contoh
+Tuliskan di bawah ini!
+1.
+2.
+```
+
+### 4. fungsi summary()
+
+Memberikan statistik ringkas untuk tiap variabel.\
+- Numeric → min, max, mean, median, quartile.\
+- Factor → frekuensi tiap kategori.
+
+``` contoh
+summary(data yang digunakan)
+summary(data1)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan?
+
+```         
+Tuliskan di bawah ini!
+1.
+2.
+```
+
+### 5. fungsi names()
+
+Digunakan untuk melihat atau mengubah nama elemen dari suatu objek di R.\
+- Objek bisa berupa vector, list, dataframe.\
+- Kalau diterapkan pada dataframe.
+
+``` contoh
+names(data yang digunakan)
+names(data1)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan?
+
+```         
+Tuliskan di bawah ini!
+1.
+2.
+```
+
+## 2.3 Membersihkan Data
+
+Sebelum data diolah lebih lanjut, anda harus membersihkan *dataset* tersebut agar ketika masuk ke tahap selanjutnya tidak terdapat *error* atau hal yang tidak diinginkan. *Dataset* yang akan digunakan adalah `data_dummy_cleaning.csv`, silakan impor data tersebut untuk digunakan dalam proses membersihkan data.
+
+**Impor data**
+
+``` contoh
+data_raw <- read.csv("data_dummy_cleaning.csv")
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Silakan gunakan fungsi `head()` untuk melihat data secara sekilas.
+
+```{r}
+# Tuliskan kode untuk melihat sekilas datanya dan jalankan!
+
+```
+
+Selain fungsi `head()`, anda juga dapat menggunakan `summ()` untuk melihat ringkasan awal.
+
+```{r}
+# Tuliskan kode untuk melihat ringkasan awal data dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari data tersebut?
+
+```         
+Tuliskan di bawah ini!
+1.
+2.
+3.
+```
+
+**Petunjuk** untuk langkah selanjutnya adalah anda harus memperbaiki data yang ada pada variabel `umur, jk, dan status`.
+
+------------------------------------------------------------------------
+
+**📝 Soal 1 – *Cleaning* Umur**\
+`Instruksi:`\
+1. Nilai usia harus berada antara 0 dan 60 tahun.\
+2. Jika ada nilai di luar rentang tersebut, ubah menjadi `NA`.
+
+**👉 Tugas:**\
+1. Gunakan `indexing` untuk membersihkan variabel usia.\
+2. Hitung jumlah `NA` pada variabel `umur` setelah *cleaning* dengan `head()` atau `tail()`.
+
+``` contoh
+cara menggunakan indexing
+data$variabel[data$variabel == 2] <- NA
+```
+
+```{r}
+# Tuliskan kode anda di sini dan jalankan!
+
+```
+
+```         
+hint:
+data_raw$umur[... == ...] <- NA
+```
+
+```{r}
+# Cek kembali dengan head() untuk melihat apakah masih ada nilai -5
+
+```
+
+Apa hasil membersihkan variabel umur?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+**📝 Soal 2 – *Cleaning* Jenis Kelamin**
+
+`Instruksi:`\
+1. Variabel `jenis_kelamin` seharusnya hanya berisi "L" (laki-laki) dan "P" (perempuan).\
+2. Namun, data masih bercampur (`M` dan `F`).
+
+**👉 Tugas:**\
+1. Standarisasi nilai `jenis_kelamin` agar hanya `"L"` dan `"P"`.\
+2. Gunakan fungsi `replace()`.\
+3. Lihat hasil distribusinya dengan `tab1()`.
+
+``` contoh
+Cara menggunakan replace()
+data$variabel <- replace(data$variabel, data$variabel == "nilai lama", "nilai baru")
+```
+
+```{r}
+# Tuliskan kode anda di sini dan jalankan!
+
+```
+
+```         
+hint:
+data_raw$jenis_kelamin <- replace(..., data_raw$jenis_kelamin == "...", "...")
+```
+
+```{r}
+# Cek kembali dengan tab1() untuk melihat apakah masih ada nilai M dan F
+
+```
+
+Apa hasil membersihkan variabel jenis kelamin?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+**📝 Soal 3 – *Cleaning* Status**
+
+`Instruksi:`\
+1. Variabel `status` seharusnya hanya berisi `"Sakit"` dan `"Tidak"`.\
+2. Namun, data masih bercampur (`Sick`, `SKT`, `No`, dll).
+
+**👉 Tugas:**\
+1. Standarisasi variabel `status` agar hanya `"Sakit"` dan `"Tidak"`.\
+2. Gunakan fungsi `replace()`.\
+3. Lihat hasil distribusinya dengan `tab1()`.
+
+``` contoh
+Cara menggunakan replace()
+data$variabel <- replace(data$variabel, data$variabel == "nilai lama", "nilai baru")
+```
+
+```{r}
+# Tuliskan kode anda di sini dan jalankan!
+
+```
+
+```         
+hint:
+data_raw$status <- replace(..., data_raw$status == "...", "...")
+```
+
+```{r}
+# Cek kembali dengan tab1() untuk melihat apakah masih ada nilai selain Sakit dan Tidak
+
+```
+
+Apa hasil membersihkan variabel status?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+Selamat anda telah menyelesaikan pembelajaran pada Bab 2, anda dapat melanjutkan ke Bab selanjutnya!
+
+referensi: <https://cran.r-project.org/doc/contrib/Epicalc_Book.pdf>\
+Dibuat Oleh:\
+`Muhammad Ilham Basgoro`

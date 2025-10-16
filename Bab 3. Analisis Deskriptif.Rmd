@@ -1,0 +1,271 @@
+---
+title: "Modul Analisis Data Epidemiologi dengan R"
+author: "Muhammad Ilham Basgoro"
+date: "2025-10-03"
+output: html_document
+---
+
+# Bab 3. Analisis Deskriptif dalam Epidemiologi
+
+Sebelum memulai analisis anda harus memanggil kembali *package* `epicalc` terlebih dahulu, setelah itu anda harus membersihkan *workspace* dan memori, menggunakan fungsi `zap()`, agar aplikasi *RStudio* anda tidak berat.
+
+```         
+library(epicalc)
+zap()
+```
+
+```{r message=FALSE, warning=FALSE}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Analisis deskriptif menggambarkan data menurut orang (*person*), tempat (*place*), dan waktu (*time*). Data yang digunakan adalah data bawaan dari *package* *epicalc*, data tersebut bernama `Familydata`.
+
+Sebelum melakukan analisis deskriptif, anda harus memanggil *dataset* `Familydata` terlebih dahulu, cara memanggilnya adalah sebagai berikut
+
+``` contoh
+data(Familydata)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Silakan lihat variabel yang ada pada data tersebut menggunakan fungsi `des()`
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari data tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+Kamus Data/Definisi Operasional setiap variabel:
+
+| Variabel | Tipe      | Deskripsi                                    |
+|----------|-----------|----------------------------------------------|
+| code     | character | ID Responden                                 |
+| age      | integer   | Umur (tahun)                                 |
+| ht       | integer   | Tinggi badan (cm)                            |
+| wt       | integer   | Berat badan (kg)                             |
+| money    | integer   | Uang saku (baht)                             |
+| sex      | factor    | Jenis kelamin (F = Perempuan, M = Laki-laki) |
+
+## 3.1 Eksplorasi data menggunakan `Epicalc`
+
+Fungsi `summ()` memberikan statistik ringkasan untuk setiap variabel, baris demi baris. Hal ini sangat berguna untuk variabel numerik tetapi kurang berguna untuk faktor, terutama yang memiliki lebih dari dua level. Epicalc memiliki fungsi lain yang memberikan statistik ringkasan untuk variabel numerik dan tabel frekuensi dengan label level dan kode untuk faktor.
+
+``` contoh
+summ(Familydata)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Berbeda dengan hasil dari fungsi `summ()`, `codebook()` menangani setiap variabel dalam data frame dengan detail yang lebih rinci. Jika label variabel tersedia, label tersebut ditampilkan dalam output. Untuk faktor, nama tabel untuk label tingkat ditampilkan, dan kode untuk tingkat tersebut ditampilkan dalam kolom, diikuti dengan frekuensi dan persentase distribusi. Fungsi ini sangat berguna. Output dapat digunakan untuk membuat tabel data dasar dari naskah yang dihasilkan dari data frame.
+
+``` contoh
+codebook(Familydata)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+### 1. Variabel **age**
+
+Lakukan analisis deskriptif untuk `age`.
+
+``` contoh
+summ(Familydata$age)
+axis(side=2, 1:length(Familydata$age))
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Untuk membantu memudahkan pemeriksaan lebih lanjut, variabel usia yang telah ditampilkan pada grafik dapat dilihat secara detail menggunakan `sort()`.
+
+``` contoh
+sort(Familydata$age)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari variabel `age` tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+### 2. Variabel **ht**
+
+Lakukan analisis deskriptif untuk `ht`.
+
+``` contoh
+summ(Familydata$...)
+axis(side=2, 1:length(Familydata$...))
+sort(Familydata$...)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari variabel `ht` tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+### 3. Variabel **wt**
+
+Lakukan analisis deskriptif untuk `wt`.
+
+``` contoh
+summ(Familydata$...)
+axis(side=2, 1:length(Familydata$...))
+sort(Familydata$...)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari variabel `wt` tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+### 4. Variabel **money**
+
+Lakukan analisis deskriptif untuk `money`.
+
+``` contoh
+summ(Familydata$...)
+axis(side=2, 1:length(Familydata$...))
+sort(Familydata$...)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari variabel `money` tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+### 5. Variabel **sex**
+
+Lakukan analisis deskriptif untuk `sex`.\
+Sebelum anda melakukan analisis, apakah variabel `sex` memiliki tipe data yang sama dengan 4 variabel sebelumnya?\
+Jika berbeda apakah fungsi untuk analisis deskriptifnya menggunakan fungsi yang sama dengan sebelumnya?
+
+```         
+hint:
+sex merupakan factor sehingga untuk analisis deskriptif menggunakan fungsi tab1()
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari variabel `sex` tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+### 6. Variabel **ht** berdasarkan **sex**
+
+Lakukan analisis deskriptif untuk `ht` berdasarkan `sex`.\
+
+``` contoh
+summ(Familydata$ht, by=Familydata$sex)
+```
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari hasil analisis tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+------------------------------------------------------------------------
+
+**Latihan**\
+1. Lakukan analisis deskriptif **wt** berdasarkan **sex**
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+
+```
+
+Apa yang dapat anda simpulkan dari hasil analisis tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+3.  Lakukan analisis deskriptif **money** berdasarkan **sex**
+
+```{r}
+# Tuliskan ulang kode tersebut dan jalankan!
+summ(Familydata$money, by=Familydata$sex)
+```
+
+Apa yang dapat anda simpulkan dari hasil analisis tersebut?
+
+```         
+Tuliskan jawaban anda di bawah ini!
+1.
+2.
+```
+
+------------------------------------------------------------------------
+
+Selamat anda telah menyelesaikan pembelajaran pada Bab 3, anda dapat melanjutkan ke Bab selanjutnya!
+
+Referensi: <https://cran.r-project.org/doc/contrib/Epicalc_Book.pdf>\
+Dibuat Oleh:\
+`Muhammad Ilham Basgoro`
